@@ -1,0 +1,123 @@
+Script started on Sat 10 Sep 2016 11:32:38 AM PDT
+[4mspedeBox[24m:[1m~/csc159/lab2[0m> spede-mkmf -q
+(spede-mkmf $Revision: 1.2 $/1)
+
+Found your ./Makefile
+. done
+[4mspedeBox[24m:[1m~/csc159/lab2[0m> make
+link386 -g  -o MyOS.dli sample.o
+(link-386.sh $Revision: 1.14 $ )
+Done linking "MyOS.dli" (with GDB enabled) at 1m.
+[4mspedeBox[24m:[1m~/csc159/lab2[0m> flash MyOS.dli
+unable to open config file, using defaults....
+
+>>>>>Welcome to the Flames Shell (FlaSh)  $Revision: 1.3 $ (SC/BJW)<<<<<<
+Type ? for help
+
+FLASH % d
+File type is 'ELF'
+Total blocks to download:  0x6b  (128 bytes each)
+
+?Now have attention of monitor...No of Blocks Downloaded : 0x2 No of Blocks Downloaded : 0x3 No of Blocks Downloaded : 0x4 No of Blocks Downloaded : 0x5 No of Blocks Downloaded : 0x6 No of Blocks Downloaded : 0x7 No of Blocks Downloaded : 0x8 No of Blocks Downloaded : 0x9 No of Blocks Downloaded : 0xa No of Blocks Downloaded : 0xb No of Blocks Downloaded : 0xc No of Blocks Downloaded : 0xd No of Blocks Downloaded : 0xe No of Blocks Downloaded : 0xf No of Blocks Downloaded : 0x10 No of Blocks Downloaded : 0x11 No of Blocks Downloaded : 0x12 No of Blocks Downloaded : 0x13 No of Blocks Downloaded : 0x14 No of Blocks Downloaded : 0x15 No of Blocks Downloaded : 0x16 No of Blocks Downloaded : 0x17 No of Blocks Downloaded : 0x18 No of Blocks Downloaded : 0x19 No of Blocks Downloaded : 0x1a No of Blocks Downloaded : 0x1b No of Blocks Downloaded : 0x1c No of Blocks Downloaded : 0x1d No of Blocks Downloaded : 0x1e No of Blocks Downloaded : 0x1f No of Blocks Downloaded : 0x20 No of Blocks Downloaded : 0x21 No of Blocks Downloaded : 0x22 No of Blocks Downloaded : 0x23 No of Blocks Downloaded : 0x24 No of Blocks Downloaded : 0x25 No of Blocks Downloaded : 0x26 No of Blocks Downloaded : 0x27 No of Blocks Downloaded : 0x28 No of Blocks Downloaded : 0x29 No of Blocks Downloaded : 0x2a No of Blocks Downloaded : 0x2b No of Blocks Downloaded : 0x2c No of Blocks Downloaded : 0x2d No of Blocks Downloaded : 0x2e No of Blocks Downloaded : 0x2f No of Blocks Downloaded : 0x30 No of Blocks Downloaded : 0x31 No of Blocks Downloaded : 0x32 No of Blocks Downloaded : 0x33 No of Blocks Downloaded : 0x34 No of Blocks Downloaded : 0x35 No of Blocks Downloaded : 0x36 No of Blocks Downloaded : 0x37 No of Blocks Downloaded : 0x38 No of Blocks Downloaded : 0x39 No of Blocks Downloaded : 0x3a No of Blocks Downloaded : 0x3b No of Blocks Downloaded : 0x3c No of Blocks Downloaded : 0x3d No of Blocks Downloaded : 0x3e No of Blocks Downloaded : 0x3f No of Blocks Downloaded : 0x40 No of Blocks Downloaded : 0x41 No of Blocks Downloaded : 0x42 No of Blocks Downloaded : 0x43 No of Blocks Downloaded : 0x44 No of Blocks Downloaded : 0x45 No of Blocks Downloaded : 0x46 No of Blocks Downloaded : 0x47 No of Blocks Downloaded : 0x48 No of Blocks Downloaded : 0x49 No of Blocks Downloaded : 0x4a No of Blocks Downloaded : 0x4b No of Blocks Downloaded : 0x4c No of Blocks Downloaded : 0x4d No of Blocks Downloaded : 0x4e No of Blocks Downloaded : 0x4f No of Blocks Downloaded : 0x50 No of Blocks Downloaded : 0x51 No of Blocks Downloaded : 0x52 No of Blocks Downloaded : 0x53 No of Blocks Downloaded : 0x54 No of Blocks Downloaded : 0x55 No of Blocks Downloaded : 0x56 No of Blocks Downloaded : 0x57 No of Blocks Downloaded : 0x58 No of Blocks Downloaded : 0x59 No of Blocks Downloaded : 0x5a No of Blocks Downloaded : 0x5b No of Blocks Downloaded : 0x5c No of Blocks Downloaded : 0x5d No of Blocks Downloaded : 0x5e No of Blocks Downloaded : 0x5f No of Blocks Downloaded : 0x60 No of Blocks Downloaded : 0x61 No of Blocks Downloaded : 0x62 No of Blocks Downloaded : 0x63 No of Blocks Downloaded : 0x64 No of Blocks Downloaded : 0x65 No of Blocks Downloaded : 0x66 No of Blocks Downloaded : 0x67 No of Blocks Downloaded : 0x68 No of Blocks Downloaded : 0x69 No of Blocks Downloaded : 0x6a No of Blocks Downloaded : 0x6b No of Blocks Downloaded : 0x6c Load Successful ; Code loaded at 0x0x101000 (4586 bytes/sec)
+
+FLASH % gdb
+GNU gdb 5.3
+Copyright 2002 Free Software Foundation, Inc.
+GDB is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certain conditions.
+Type "show copying" to see the conditions.
+There is absolutely no warranty for GDB.  Type "show warranty" for details.
+This GDB was configured as "--host=i686-linux-gnu --target=i386-unknown-gnu"...
+0x0010258d in breakpoint ()
+Breakpoint 1 at 0x1011c6: file sample.c, line 18.
+main () at sample.c:18
+18	   i=128;
+GDB386> list    break DisplayMsg
+Breakpoint 2 at 0x10117a: file sample.c, line 7.
+GDB386> list
+13	}
+14	int main(void)
+15	{
+16	   int i;
+17	   //int j;
+18	   i=128;
+19	   DisplayMsg(i);
+20	   return 0;
+21	}
+GDB386> next
+19	   DisplayMsg(i);
+GDB386> next
+
+Breakpoint 2, DisplayMsg (i=0x80) at sample.c:7
+7	   for(j=0;j<=4;j++)
+GDB386> next
+9	    printf(" %d Hello world %d \nECS",i,2*i);
+GDB386> next
+ 128 Hello world 256 
+ECS10	    cons_printf("--> Hello World <--\nCPE/CSC");
+GDB386> info b
+Num Type           Disp Enb Address    What
+2   breakpoint     keep y   0x0010117a in DisplayMsg at sample.c:7
+	breakpoint already hit 1 time
+GDB386> next
+11	   i++;
+GDB386> info reg
+eax            0x1b	0x1b
+ecx            0x100743	0x100743
+edx            0x10dc4	0x10dc4
+ebx            0x100000	0x100000
+esp            0x10e74	0x10e74
+ebp            0x10e78	0x10e78
+esi            0x2000000	0x2000000
+edi            0x51136	0x51136
+eip            0x1011b2	0x1011b2
+eflags         0x106	0x106
+cs             0x8	0x8
+ss             0x10	0x10
+ds             0x10	0x10
+es             0x10	0x10
+fs             0x10	0x10
+gs             0x10	0x10
+fctrl          0x0	0x0
+fstat          0x0	0x0
+ftag           0x0	0x0
+fiseg          0x0	0x0
+fioff          0x0	0x0
+foseg          0x0	0x0
+fooff          0x0	0x0
+fop            0x0	0x0
+GDB386> next
+7	   for(j=0;j<=4;j++)
+GDB386> next
+9	    printf(" %d Hello world %d \nECS",i,2*i);
+GDB386> next
+ 129 Hello world 258 
+ECS10	    cons_printf("--> Hello World <--\nCPE/CSC");
+GDB386> next
+11	   i++;
+GDB386> where
+#0  DisplayMsg (i=0x81) at sample.c:11
+#1  0x001011d6 in main () at sample.c:19
+#2  0x0010113d in _start (memSize=0x2000000, parms=0x51136 "-g", 
+    loadedfiles=0x100000)
+#3  0x00040ec1 in ?? ()
+#4  0x00040320 in ?? ()
+GDB386> c
+Continuing.
+ 130 Hello world 260 
+ECS 131 Hello world 262 
+ECS 132 Hello world 264 
+ECS
+Program exited normally.
+GDB386> delete DisplayMsg
+warning: bad breakpoint number at or near 'DisplayMsg'
+GDB386> clear
+No breakpoint at this line.
+GDB386> q
+I m in gdbMyOS.dli debug file
+FLASH % q
+
+[4mspedeBox[24m:[1m~/csc159/lab2[0m> exit
+exit
+
+Script done on Sat 10 Sep 2016 11:36:50 AM PDT

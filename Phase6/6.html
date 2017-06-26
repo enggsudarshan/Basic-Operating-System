@@ -1,0 +1,91 @@
+<small><i>
+Sacramento State<br>
+Computer Engineering / Computer Science<br>
+CpE/CSc 159 Operating System Pragmatics (Fall 2016)<br>
+</i></small>
+<p>
+<center><big><b>
+Phase 6 &nbsp; File System
+</big></b></center>
+
+<h3>Goals</h3>
+<ol>
+<li>
+To expand and provide processes to a basic <i>file system</i>
+hosted by the OS kernel.
+<p>
+<li>
+In this phase the terminal process conducts a login dialogue and
+accept a few simple file-system type of shell commands:
+<ol type=A>
+<li><tt>ls</tt> [<i>path to a file or directory</i>] - to mimic the unix
+command <i>ls</i>.
+   If the optional path is not given, the root directory "/" is assumed.
+<li><tt>cat</tt> [<i>directory path</i>]<i>filename</i> -
+   to mimic the unix shell command <i>cat</i> (concatenate). This command
+   must be used in conjunction with a path to a file, e.g., "cat note.txt"
+   or "cat www/hello.html."
+   If no directory path ("www/") is given, the root directory is assumed
+   to look for the file.
+<li><tt>logout</tt> - to logout (back to the login prompt).
+   The password is set as "pizza." In case a terminal keyboard are missing
+   certain keys, try to use numbers 11 for "ls," 222 for "cat," and "000000"
+   for "logout." The files and directories are also represented by numbers.
+   List the directory will show you their substitution numbers.
+</ol>
+<p>
+</ol>
+
+<h3>File System Service Calls</h3>
+Similar to a standard file system query protocol, we will
+experiment four difference system calls.
+<ol>
+<li>
+<b><i>void Fstat(char *name, char *read_data)</b></i>:
+to query the attributes of a named object
+(file/directory), e.g., size, type, etc.; this syscall is used
+with two strings ("char" pointers) given as arguments. The first
+is the object name to "stat" (check) and the second will carry
+the information returned from the file system. The read data can
+be casted to an "attribute type" pointer to decipher information.
+<li>
+<b><i>int Fopen(char *name)</b></i>:
+To open the said named object for reading, this syscall is used.
+It returns a File Descriptor (FD) associated with the named object.
+A file descriptor has an I/O "buffer" assigned for sequential reading.
+<li>
+<b><i>void Fread(int FD, char *data_read)</b></i>:
+With the FD, the reading is usually conducted in a loop calling
+this syscall. Each successful "read" will fill the data from
+the file into a buffer of which the address is passed to the kernel.
+(This is not the same buffer the FD uses to the actual file storage.)
+As the <i>EOF</i> condition occurs, the "read" will be empty (preceeding
+with a null character).
+<li>
+<b><i>void Fclose(int FD)</b></i>:
+To close the file (FD), this syscall is used with the FD previously
+openned given as the argument.
+</ol>
+</ol>
+
+<h3>Deliverables</h3>
+<ol>
+Turn your source code in on your designated folder on host Voyager
+as usual. Correct those places mentioned in the grading results
+derived from all previous phases. (Do not correct code of previous
+phases and resubmit. It is the new code that you are turning in
+that needs attention and correction!) Otherwise, deductions repeat.
+<p>
+</ol>
+
+<h3>Review Questions</h3>
+<ol>
+<li>
+How would you incorporate device drivers of storage media to
+<i>upgrade</i> the file service to be a more realistic one?
+<p>
+<li>
+How can file services be converted into the duty of a process
+such as a file manager to handle? What can be the pros and cons
+in doing so, in terms of performance, organization, etc?
+
